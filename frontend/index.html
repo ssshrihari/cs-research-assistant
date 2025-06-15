@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CS Research Assistant</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔬 CS Research Assistant</h1>
+            <p>Discover, summarize, and explore computer science research papers with AI</p>
+            <div class="status-indicator" id="statusIndicator">
+                <span class="status-dot" id="statusDot"></span>
+                <span id="statusText">Checking connection...</span>
+            </div>
+        </div>
+
+        <div class="search-section">
+            <h2>Search Research Papers</h2>
+            <div class="search-container">
+                <input type="text" class="search-input" id="searchInput" 
+                       placeholder="Enter CS topic (e.g., 'neural networks', 'distributed systems', 'blockchain consensus')">
+                <button class="search-btn" id="searchBtn">
+                    <span class="btn-text">Search ArXiv</span>
+                    <span class="btn-loading" style="display: none;">
+                        <div class="spinner"></div>
+                        Searching...
+                    </span>
+                </button>
+            </div>
+            
+            <div class="search-suggestions">
+                <p>Popular topics:</p>
+                <div class="suggestion-tags">
+                    <span class="suggestion-tag" data-query="machine learning">Machine Learning</span>
+                    <span class="suggestion-tag" data-query="distributed systems">Distributed Systems</span>
+                    <span class="suggestion-tag" data-query="computer vision">Computer Vision</span>
+                    <span class="suggestion-tag" data-query="natural language processing">NLP</span>
+                    <span class="suggestion-tag" data-query="blockchain">Blockchain</span>
+                    <span class="suggestion-tag" data-query="reinforcement learning">Reinforcement Learning</span>
+                </div>
+            </div>
+            
+            <div class="upload-section">
+                <p>Or upload your own PDF research paper:</p>
+                <input type="file" class="upload-input" id="fileInput" accept=".pdf">
+                <label for="fileInput" class="upload-label">
+                    📄 Choose PDF File
+                </label>
+                <span id="fileName"></span>
+            </div>
+        </div>
+
+        <div class="results-section" id="resultsSection" style="display: none;">
+            <div class="results-header">
+                <h2>Research Papers</h2>
+                <div class="results-count" id="resultsCount"></div>
+            </div>
+            <div id="papersContainer"></div>
+        </div>
+    </div>
+
+    <!-- Summary Modal -->
+    <div class="summary-modal" id="summaryModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Paper Analysis</h3>
+                <button class="close-btn" id="closeModal">&times;</button>
+            </div>
+            
+            <div class="modal-tabs">
+                <button class="tab-btn active" data-tab="summary">📝 Summary</button>
+                <button class="tab-btn" data-tab="qa">💬 Q&A</button>
+            </div>
+            
+            <div class="tab-content active" id="summaryTab">
+                <div class="summary-content" id="summaryContent">
+                    <div class="loading">
+                        <div class="spinner"></div>
+                        <p>Analyzing paper with AI...</p>
+                        <small>This may take a moment for complex papers</small>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tab-content" id="qaTab">
+                <div class="qa-section">
+                    <h4>Ask Questions About This Paper</h4>
+                    <div class="qa-suggestions">
+                        <p>Try asking about:</p>
+                        <div class="qa-suggestion-buttons">
+                            <button class="qa-suggestion-btn" data-question="What is the main contribution of this paper?">Main Contribution</button>
+                            <button class="qa-suggestion-btn" data-question="What methodology do the authors use?">Methodology</button>
+                            <button class="qa-suggestion-btn" data-question="What are the key results?">Results</button>
+                            <button class="qa-suggestion-btn" data-question="What are the limitations?">Limitations</button>
+                            <button class="qa-suggestion-btn" data-question="How does this compare to previous work?">Comparison</button>
+                        </div>
+                    </div>
+                    
+                    <div class="qa-input-container">
+                        <input type="text" class="qa-input" id="qaInput" 
+                               placeholder="Ask about methodology, results, contributions, limitations...">
+                        <button class="qa-btn" id="qaBtn">
+                            <span class="btn-text">Ask Question</span>
+                            <span class="btn-loading" style="display: none;">
+                                <div class="spinner"></div>
+                                Thinking...
+                            </span>
+                        </button>
+                    </div>
+                    
+                    <div class="qa-history" id="qaHistory"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Error Toast -->
+    <div class="error-toast" id="errorToast">
+        <div class="toast-content">
+            <span class="toast-icon">⚠️</span>
+            <span class="toast-message" id="toastMessage"></span>
+            <button class="toast-close" id="toastClose">&times;</button>
+        </div>
+    </div>
+
+    <!-- Success Toast -->
+    <div class="success-toast" id="successToast">
+        <div class="toast-content">
+            <span class="toast-icon">✅</span>
+            <span class="toast-message" id="successMessage"></span>
+            <button class="toast-close" id="successClose">&times;</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
