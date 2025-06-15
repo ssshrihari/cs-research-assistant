@@ -4,7 +4,7 @@ import os
 import sys
 import logging
 from backend.utils.arxiv_client import ArxivClient
-from backend.utils.pdf_processor import PDFProcessor  
+from backend.utils.pdf_processor_resilient import PDFProcessor  
 from backend.models.summarizer import PaperSummarizer
 
 # Configure logging
