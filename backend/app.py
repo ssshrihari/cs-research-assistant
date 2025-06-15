@@ -3,9 +3,9 @@ from flask_cors import CORS
 import os
 import sys
 import logging
-from utils.arxiv_client import ArxivClient
-from utils.pdf_processor import PDFProcessor
-from models.summarizer_safe import PaperSummarizer
+from backend.utils.arxiv_client import ArxivClient
+from backend.utils.pdf_processor import PDFProcessor  
+from backend.models.summarizer import PaperSummarizer
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
